@@ -13,7 +13,7 @@ int countDigits(int n){
     }
     return cnt;
 }
-
+mai ardhad niiiga hu!!!
 int main(){
     int t;
     cin >> t;

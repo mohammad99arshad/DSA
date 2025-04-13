@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 class Node
 {
 public:
@@ -12,9 +11,10 @@ public:
     this->next = nullptr;
   }
 };
-
-int revereseLL(Node *&head)
+bool isPalindrome(Node *head)
 {
+  if (!head && !head->next)
+    return true;
   Node *temp = head;
   stack<int> st;
   while (temp != nullptr)
@@ -25,23 +25,17 @@ int revereseLL(Node *&head)
   temp = head;
   while (temp != nullptr)
   {
-    temp->data = st.top();
-    st.pop();
+    if (temp->data != st.top())
+      return false;
     temp = temp->next;
+    st.pop();
   }
+  return true;
 }
-void printList(Node *head)
-{
-  while (head != NULL)
-  {
-    cout << head->data << " ";
-    head = head->next;
-  }
-  cout << endl;
-}
+
 int main()
 {
-  vector<int> arr = {3, 4, 5, 6, 7};
+  vector<int> arr = {1, 2, 3, 2, 1};
   Node *head = new Node(arr[0]);
   Node *tail = head;
 
@@ -50,14 +44,10 @@ int main()
     tail->next = new Node(arr[i]);
     tail = tail->next;
   }
-
-  cout << "Original List: " << endl;
-  printList(head);
-
-  revereseLL(head);
-
-  cout << "Reversed List: " << endl;
-  printList(head);
+  if (isPalindrome(head))
+    cout << "The linked list is a palindrome." << endl;
+  else
+    cout << "The linked list is not a palindrome." << endl;
 
   return 0;
 }

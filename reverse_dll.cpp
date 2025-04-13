@@ -6,39 +6,57 @@ class Node
 public:
   int data;
   Node *next;
+  Node *prev;
+
   Node(int data)
   {
     this->data = data;
     this->next = nullptr;
+    this->prev = nullptr;
   }
 };
 
-int revereseLL(Node *&head)
+Node *reverseDLL(Node *head)
 {
+  if (head == nullptr || head->next == nullptr)
+    return head;
+
+  stack<Node *> st;
   Node *temp = head;
-  stack<int> st;
+
   while (temp != nullptr)
   {
-    st.push(temp->data);
+    st.push(temp);
     temp = temp->next;
   }
-  temp = head;
-  while (temp != nullptr)
+
+  Node *newHead = st.top();
+  st.pop();
+  temp = newHead;
+  temp->prev = nullptr;
+
+  while (!st.empty())
   {
-    temp->data = st.top();
+    temp->next = st.top();
+    st.top()->prev = temp;
+    temp = temp->next;
     st.pop();
-    temp = temp->next;
   }
+
+  temp->next = nullptr;
+  return newHead;
 }
+
 void printList(Node *head)
 {
-  while (head != NULL)
+  while (head != nullptr)
   {
     cout << head->data << " ";
     head = head->next;
   }
   cout << endl;
 }
+
 int main()
 {
   vector<int> arr = {3, 4, 5, 6, 7};
@@ -47,14 +65,16 @@ int main()
 
   for (int i = 1; i < arr.size(); i++)
   {
-    tail->next = new Node(arr[i]);
-    tail = tail->next;
+    Node *newNode = new Node(arr[i]);
+    tail->next = newNode;
+    newNode->prev = tail;
+    tail = newNode;
   }
 
   cout << "Original List: " << endl;
   printList(head);
 
-  revereseLL(head);
+  head = reverseDLL(head);
 
   cout << "Reversed List: " << endl;
   printList(head);

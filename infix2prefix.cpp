@@ -10,8 +10,30 @@ int priority(char op)
   return 0;
 }
 
-string infix2postfix(string s)
+string reverse(string s)
 {
+  stack<char> st;
+  for (char c : s)
+  {
+    if (c == '(')
+      st.push(')');
+    else if (c == ')')
+      st.push('(');
+    else
+      st.push(c);
+  }
+  string reversed = "";
+  while (!st.empty())
+  {
+    reversed += st.top();
+    st.pop();
+  }
+  return reversed;
+}
+
+string infix2prefix(string s)
+{
+  s = reverse(s);
   int i = 0;
   string ans = "";
   stack<char> st;
@@ -56,13 +78,13 @@ string infix2postfix(string s)
     ans += st.top();
     st.pop();
   }
-
+  ans = reverse(ans);
   return ans;
 }
 
 int main()
 {
   string expr = "a+(b*c)";
-  cout << "Postfix: " << infix2postfix(expr) << endl;
+  cout << "Prefix: " << infix2prefix(expr) << endl;
   return 0;
 }

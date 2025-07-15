@@ -22,3 +22,5 @@ int main() {
     return 0;
 }
 
+
+// space and time complextiy are : O(log n)

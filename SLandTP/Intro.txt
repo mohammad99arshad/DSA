@@ -1,0 +1,6 @@
+types of problem in sliding window and two pointers are:
+
+I. constant window
+II. longest subbarray/substring where <condition>
+III. Number of subbarray where <condition>
+Iv. shortest/minimum window where <condition>

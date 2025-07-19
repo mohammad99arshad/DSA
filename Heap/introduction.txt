@@ -1,0 +1,22 @@
+indentification: k element
+                 smalllest or lowest or closest
+                 largest or greatest or top 
+
+what heap to use :
+ k + smalllest --> maxheap
+ k + largest --> minheap
+
+Above thing does not always work if u r not getting what to use 
+take an example for it.
+
+complexity: nlog(k)
+
+declaration:
+for maxheap: priority_queue<int> maxheap;
+for minheap : 
+priority_queue<int, vector<int>, greater<int>>minheap;
+
+when there are pair in questin then define at the top:
+# define pair<int, pair<int, int>>ppi
+priority_queue<ppi, vector<ppi>, greater<ppi>>minheap;
+
